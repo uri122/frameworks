@@ -1,0 +1,45 @@
+.container {
+  width: 700px;
+  height: 300px;
+  padding: 20px;
+}
+
+.link {
+  display: flex;
+  height: 100%;
+}
+
+.img {
+  object-fit: scale-down;
+}
+
+.infoBox {
+  margin-left: 20px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.title {
+  color: black;
+}
+
+.genres {
+  flex-direction: row;
+  color: #777;
+  font-weight: bold;
+}
+
+.genres li + li::before {
+  content: ",";
+  display: inline;
+  margin-right: 6px;
+}
+
+.summary {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  color: #333;
+}
