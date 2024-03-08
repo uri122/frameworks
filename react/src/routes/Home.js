@@ -1,5 +1,18 @@
 import { useEffect, useState } from "react";
 import MovieThumb from "../components/MovieThumb";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }  
+`;
 
 function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -8,11 +21,11 @@ function Home() {
   const getMovies = async () => {
     const json = await (
       await fetch(
-        `https://yts.mx/api/v2/list_movies.json?minimum_rating=9.0&sort_by=year`
+        'https://api.themoviedb.org/3/movie/popular?page=1&api_key=15929ba73ea97df7f30164465b7ea21f'
       )
     ).json();
 
-    setMovies(json.data.movies);
+    setMovies(json.results);
     setIsLoading(false);
   };
 
@@ -21,7 +34,7 @@ function Home() {
   }, []);
 
   return (
-    <div className="home">
+    <Wrapper>
       <h1>Top Movies</h1>
       <hr></hr>
       {isLoading ?
@@ -31,16 +44,16 @@ function Home() {
           <MovieThumb
               key={movie.id}
               id={movie.id}
-              coverImg={movie.medium_cover_image}
               title={movie.title}
-              summary={movie.summary}
+              release={movie.release_date}
+              posterImg={movie.poster_path}
+              summary={movie.overview}
               genres={movie.genres}
             />
         ))}
       </ul>)
-      }
-      
-    </div>
+      }      
+    </Wrapper>
   );
 }
 
